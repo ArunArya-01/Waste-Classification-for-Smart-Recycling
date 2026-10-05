@@ -1,0 +1,7 @@
+tensorflow>=2.16,<2.19
+scikit-learn>=1.4
+matplotlib>=3.8
+seaborn>=0.13
+pandas>=2.2
+pillow>=10.0
+streamlit>=1.35

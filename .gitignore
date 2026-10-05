@@ -1,0 +1,20 @@
+# Datasets and generated data
+data/raw/
+data/processed/
+
+# Trained models and checkpoints
+models/
+*.h5
+*.keras
+*.tflite
+*.ckpt
+
+# Python and notebook artifacts
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Operating-system files
+.DS_Store
