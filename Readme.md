@@ -11,9 +11,8 @@ strongest held-out test performance for a smart-recycling image-classification d
 
 ## Dataset plan
 
-The selected source is the **Merged Waste Classification Dataset (MWCD)**, a
-CC BY 4.0 dataset containing 35,168 RGB images across standard waste labels.
-This project uses only these five labels:
+The selected source is Kaggle's **Garbage Classification** dataset. Its labels
+are standardized into the five classes required by the assignment:
 
 - `plastic`
 - `paper`
@@ -21,11 +20,23 @@ This project uses only these five labels:
 - `metal`
 - `organic`
 
-Other MWCD labels are deliberately excluded so every prediction matches the
-assignment specification. The exact image count, class balance, corrupt-file
-check, and final split counts will be generated in the Colab dataset-audit step.
+The source labels `paper`, `plastic`, and `metal` are retained unchanged.
+`biological` is mapped to `organic`, while `white-glass`, `green-glass`, and
+`brown-glass` are merged into `glass`. The remaining source labels are excluded
+so every prediction matches the assignment specification.
 
-Dataset source: https://data.mendeley.com/datasets/x863v66fv3/1
+Current standardized dataset counts before the corruption audit:
+
+| Class | Images |
+| --- | ---: |
+| Plastic | 865 |
+| Paper | 1,050 |
+| Glass | 2,011 |
+| Metal | 769 |
+| Organic | 985 |
+| **Total** | **5,680** |
+
+Dataset source: https://www.kaggle.com/datasets/mostafaabla/garbage-classification
 
 ## Planned workflow
 
