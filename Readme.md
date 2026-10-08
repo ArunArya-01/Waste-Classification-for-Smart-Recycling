@@ -140,13 +140,25 @@ $$\hat{P}(y = c \mid \mathbf{x}) = (1 - w) \cdot P_{\text{CNN}}(y = c \mid \math
 
 ## 📈 Performance & Model Comparison
 
-*Evaluated on the completely held-out, untouched test split (15% of dataset):*
+*Evaluated on the completely held-out, untouched test split (852 images, 15% of dataset):*
 
-| Model Architecture | Test Accuracy | Weighted Precision | Weighted Recall | Weighted F1-Score | Inference Latency |
-|---|:---:|:---:|:---:|:---:|:---:|
-| **Custom CNN (Baseline)** | Baseline | Good | Good | Good | Fast (~15ms) |
-| **MobileNetV2 (Fine-Tuned)** | High | Very High | Very High | Very High | Ultra-Light (~25ms) |
-| **Combined Ensemble (Soft Voting)** | **Optimal** | **Highest** | **Highest** | **Highest** | Robust Dual (~40ms) |
+| Model Architecture | Test Accuracy | Weighted Precision | Weighted Recall | Weighted F1-Score | Remarks |
+|---|:---:|:---:|:---:|:---:|---|
+| **Custom CNN (Baseline)** | 64.32% | 68.51% | 64.32% | 63.50% | Scratch baseline (struggles with complex transparency/shapes) |
+| **Combined Ensemble (Equal 50/50)** | 90.38% | 90.83% | 90.38% | 90.32% | Equal blend pulls performance down toward CNN baseline |
+| **MobileNetV2 (Fine-Tuned)** | 92.61% | 92.90% | 92.61% | 92.65% | Strong transfer learning feature extraction |
+| **Combined Ensemble (Optimal 90/10)** 🏆 | **92.72%** | **93.05%** | **92.72%** | **92.77%** | **Best overall** ($0.90 \times \text{MobileNet} + 0.10 \times \text{CNN}$) |
+
+### 🎯 Per-Class Performance Breakdown (Best Combined Model)
+
+| Waste Category | Precision | Recall | F1-Score | Test Support | Key Characteristic |
+|---|:---:|:---:|:---:|:---:|---|
+| **Organic** | **97.4%** | **100.0%** | **98.7%** | 148 | Flawless recall: zero organic items missed |
+| **Paper** | **97.4%** | 93.0% | **95.1%** | 158 | Exceptional precision across paper & cardboard |
+| **Glass** | **95.7%** | 89.0% | **92.3%** | 301 | High precision; minor confusion with clear plastics |
+| **Metal** | 84.4% | **93.9%** | **88.9%** | 115 | High recall; catches almost all cans and foil containers |
+| **Plastic** | 84.4% | **91.5%** | **87.8%** | 130 | Solid detection; occasional overlap with transparent glass |
+| **Overall Weighted** | **93.05%** | **92.72%** | **92.77%** | **852** | **Production-grade waste segregation performance** |
 
 > 💡 *Full evaluation metrics, classification reports, and test arrays are exported in [`outputs/phase6_combined_model/combined_model_comparison.csv`](file:///Users/arunarya/Documents/Waste%20Classification%20for%20Smart%20Recycling/outputs/phase6_combined_model/combined_model_comparison.csv).*
 
